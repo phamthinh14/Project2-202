@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/phamt/CLionProjects/Project2/Foundable.h
+iostream
+-
+cstdlib
+-
+string
+-
+
+C:/Users/phamt/CLionProjects/Project2/Game.cpp
+Game.h
+C:/Users/phamt/CLionProjects/Project2/Game.h
+fstream
+-
+string
+-
+sstream
+-
+
+C:/Users/phamt/CLionProjects/Project2/Game.h
+iostream
+-
+fstream
+-
+string
+-
+Wizard.h
+C:/Users/phamt/CLionProjects/Project2/Wizard.h
+Foundable.h
+C:/Users/phamt/CLionProjects/Project2/Foundable.h
+
+C:/Users/phamt/CLionProjects/Project2/Wizard.h
+iostream
+-
+string
+-
+Foundable.h
+C:/Users/phamt/CLionProjects/Project2/Foundable.h
+
