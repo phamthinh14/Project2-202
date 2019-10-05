@@ -5,10 +5,10 @@
 #include "Foundable.h"
 
 Foundable::Foundable() {
-    SetName("Ethan");
-    SetType("Wizard");
-    SetRarity(1);
-    SetToughness(10);
+//    SetName("Ethan");
+//    SetType("Wizard");
+//    SetRarity(1);
+//    SetToughness(10);
 }
 
 Foundable::Foundable(string name, string type, int rarity, int toughness) {

@@ -61,6 +61,12 @@ public:
 
     void SetLevel(int level);
 
+    void SetWin(int wins);
+
+    void SetLose(int lose);
+
+    void CountWins();
+
     void CountLoses();
 
     // Name: InsertFoundable()
@@ -83,6 +89,8 @@ public:
     // Preconditions: None
     // Postconditions: Displays a list of all foundables found by Wizard else indicates none found
     void PrintMyFoundables();
+
+//    void IncreaseToughness();
 
 private:
     // Name: IncreaseLevel()

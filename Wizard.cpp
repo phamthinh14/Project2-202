@@ -6,17 +6,18 @@
 #include <string>
 #include <ctime>
 
-static int trackFoundable = 0;
 const string fullRarityTypeWarning = "You have found all Foundables at that level of rarity!";
 
 Wizard::Wizard() {
     SetToughness(rand() % MAX_START_TOUGH + MIN_START_TOUGH);
     SetLevel(1);
+    SetWin(0);
+    SetLose(0);
 }
 
 Wizard::Wizard(string name) {
     SetName(name);
-//    SetToughness(rand() % MAX_START_TOUGH + MIN_START_TOUGH);
+    SetToughness(rand() % MAX_START_TOUGH + MIN_START_TOUGH);
     SetLevel(1);
 }
 
@@ -37,7 +38,7 @@ int Wizard::GetLosses() {
 }
 
 int Wizard::GetWins() {
-    return trackFoundable;
+    return m_wins;
 }
 
 void Wizard::SetName(string name) {
@@ -45,28 +46,41 @@ void Wizard::SetName(string name) {
 }
 
 void Wizard::SetToughness(int toughness) {
-    m_toughness += toughness;
+    m_toughness = toughness;
 }
 
 void Wizard::SetLevel(int level) {
     m_level = level;
 }
 
+void Wizard::SetWin(int wins) {
+    m_wins = wins;
+}
+
+void Wizard::SetLose(int lose) {
+    m_losses = lose;
+}
+
 void Wizard::CountLoses() {
     m_losses++;
 }
 
+void Wizard::CountWins() {
+    m_wins++;
+}
+
+//void Wizard::IncreaseToughness() {
+//    m_toughness +=
+//}
+
 void Wizard::InsertFoundable(Foundable newFoundable) {
-    if (trackFoundable < NUM_FOUNDABLE) {
-        m_foundables[NUM_FOUNDABLE] = newFoundable;
-        trackFoundable++;
-        srand(time(NULL));
-        IncreaseLevel();
-        SetToughness(rand() % LEVEL_TOUGH_INCREASE + 1);
-    }
-    if (trackFoundable == NUM_FOUNDABLE) {
-        cout << "Cannot insert anymore. Your Foundable is full. " << endl;
-    }
+
+    m_foundables[GetWins()] = newFoundable;
+    CountWins();
+    srand(time(NULL));
+    IncreaseLevel();
+
+
 }
 
 //This can be a function to check a defeated foundable of a particular rarity.
@@ -76,16 +90,16 @@ void Wizard::InsertFoundable(Foundable newFoundable) {
 // MUST MODIFIED THIS AND ADD MORE ARRAY
 bool Wizard::CheckFoundable(Foundable newFoundable) {
     bool isExist;
-    bool isNameEqual;
-    bool isTypeEqual;
-    bool isRarityEqual;
-    bool isToughnessEqual;
+    bool isNameEqual = false;
+    bool isTypeEqual = false;
+    bool isRarityEqual = false;
+    bool isToughnessEqual = false;
     for (int i = 0; i < NUM_FOUNDABLE; ++i) {
         if (m_foundables[NUM_FOUNDABLE].GetName() == newFoundable.GetName()) {
             isNameEqual = true;
         }
         if (m_foundables[NUM_FOUNDABLE].GetType() == newFoundable.GetType()) {
-            isTypeEqual == true;
+            isTypeEqual = true;
         }
         if (m_foundables[NUM_FOUNDABLE].GetRarity() == newFoundable.GetRarity()) {
             isRarityEqual = true;
@@ -110,16 +124,17 @@ bool Wizard::AttackFoundable(Foundable enemy) {
     }
     if (enemy.GetToughness() < GetToughness()) {
         isDefeated = true;
+//        InsertFoundable(enemy);
     }
     return isDefeated;
 }
 
 void Wizard::PrintMyFoundables() {
-    if (trackFoundable == 0) {
+    if (GetWins() == 0) {
         cout << "You have not defeated any foundables yet.";
     }
-    if (trackFoundable != 0) {
-        for (int i = 0; i < trackFoundable; ++i) {
+    if (GetWins() != 0) {
+        for (int i = 0; i < GetWins(); ++i) {
             cout << m_foundables[i].GetName() << " " << m_foundables[i].GetType() <<
                  " Rarity: " << m_foundables[i].GetRarity() << " Toughness: " << m_foundables[i].GetToughness()
                  << endl;
