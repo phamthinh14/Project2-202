@@ -9,7 +9,7 @@
 const string fullRarityTypeWarning = "You have found all Foundables at that level of rarity!";
 
 Wizard::Wizard() {
-    SetToughness(rand() % MAX_START_TOUGH + MIN_START_TOUGH);
+    SetToughness((rand() % MIN_START_TOUGH) + MIN_START_TOUGH);
     SetLevel(1);
     SetWin(0);
     SetLose(0);
@@ -17,7 +17,7 @@ Wizard::Wizard() {
 
 Wizard::Wizard(string name) {
     SetName(name);
-    SetToughness(rand() % MAX_START_TOUGH + MIN_START_TOUGH);
+    SetToughness((rand() % MIN_START_TOUGH) + MIN_START_TOUGH);
     SetLevel(1);
 }
 
@@ -95,16 +95,16 @@ bool Wizard::CheckFoundable(Foundable newFoundable) {
     bool isRarityEqual = false;
     bool isToughnessEqual = false;
     for (int i = 0; i < NUM_FOUNDABLE; ++i) {
-        if (m_foundables[NUM_FOUNDABLE].GetName() == newFoundable.GetName()) {
+        if (m_foundables[i].GetName().compare(newFoundable.GetName()) == 0) {
             isNameEqual = true;
         }
-        if (m_foundables[NUM_FOUNDABLE].GetType() == newFoundable.GetType()) {
+        if (m_foundables[i].GetType().compare(newFoundable.GetType()) == 0) {
             isTypeEqual = true;
         }
-        if (m_foundables[NUM_FOUNDABLE].GetRarity() == newFoundable.GetRarity()) {
+        if (m_foundables[i].GetRarity() == newFoundable.GetRarity()) {
             isRarityEqual = true;
         }
-        if (m_foundables[NUM_FOUNDABLE].GetToughness() == newFoundable.GetToughness()) {
+        if (m_foundables[i].GetToughness() == newFoundable.GetToughness()) {
             isToughnessEqual = true;
         }
     }
@@ -120,7 +120,7 @@ bool Wizard::AttackFoundable(Foundable enemy) {
     bool isDefeated;
     if (enemy.GetToughness() >= GetToughness()) {
         isDefeated = false;
-        CountLoses();
+
     }
     if (enemy.GetToughness() < GetToughness()) {
         isDefeated = true;

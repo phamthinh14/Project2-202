@@ -131,7 +131,7 @@ void Game::WizardStat() {
     cout << "Level: " << m_wizard.GetLevel() << endl;
     cout << "Toughness " << m_wizard.GetToughness() << endl;
     cout << "Foundables found:" << m_wizard.GetWins() << endl;
-    cout << "Wins " << " Loses " << endl;
+    cout << "Wins " << m_wizard.GetWins() << " Loses " << m_wizard.GetLosses() << endl;
     cout << "Win Rate: " << endl;
 }
 
@@ -151,19 +151,19 @@ void Game::AttackFoundable() {
     cin >> rarityChoice;
     switch (rarityChoice) {
         case 1:
-            SelectFoundableToAttack(rarityChoice);
+            SelectFoundableToAttack(1);
             break;
         case 2:
-            SelectFoundableToAttack(rarityChoice);
+            SelectFoundableToAttack(2);
             break;
         case 3:
-            SelectFoundableToAttack(rarityChoice);
+            SelectFoundableToAttack(3);
             break;
         case 4:
-            SelectFoundableToAttack(rarityChoice);
+            SelectFoundableToAttack(4);
             break;
         case 5:
-            SelectFoundableToAttack(rarityChoice);
+            SelectFoundableToAttack(5);
             break;
         default:
             cout << "Invalid choice. Please choose again" << endl;
@@ -173,8 +173,8 @@ void Game::AttackFoundable() {
 
 void Game::SelectFoundableToAttack(int chosenRarity) {
     int randomEnemyIndex;
-    int countRarity = 0;
     int limitOfRarity;
+    int countRarity = 0;
     int index = 0;
     switch (chosenRarity) {
         case 1:
@@ -196,7 +196,7 @@ void Game::SelectFoundableToAttack(int chosenRarity) {
 
     randomEnemyIndex = rand() % limitOfRarity;
     for (int i = 0; i < NUM_FOUNDABLE; ++i) {
-        if (m_allFoundables[i].GetRarity() == 1) {
+        if (m_allFoundables[i].GetRarity() == chosenRarity) {
 //            tempFoundableRare[index] = m_allFoundables[i];
             Foundable tempFoundable(m_allFoundables[i].GetName(), m_allFoundables[i].GetType(),
                                     m_allFoundables[i].GetRarity(), m_allFoundables[i].GetToughness());
@@ -204,15 +204,17 @@ void Game::SelectFoundableToAttack(int chosenRarity) {
             ++index;
         }
     }
+    cout << "Size tempArray: " << index << endl;
     while (m_wizard.CheckFoundable(tempFoundableRare[randomEnemyIndex])) {
-        countRarity++;
+
         if (countRarity == limitOfRarity) {
             cout << "You have defeated all the Foundables of the rarity " << chosenRarity << endl;
             break;
         }
-        if (countRarity < limitOfRarity) {
-            randomEnemyIndex = rand() % limitOfRarity;
-        }
+//        if (countRarity < limitOfRarity) {
+        randomEnemyIndex = rand() % limitOfRarity;
+        countRarity++;
+//        }
     }
     if (countRarity <= limitOfRarity) {
         cout << tempFoundableRare[randomEnemyIndex].GetName() << " " << tempFoundableRare[randomEnemyIndex].GetType()
@@ -228,6 +230,7 @@ void Game::SelectFoundableToAttack(int chosenRarity) {
         }
         if (!m_wizard.AttackFoundable(tempFoundableRare[randomEnemyIndex])) {
             cout << "You have not defeated " << tempFoundableRare[randomEnemyIndex].GetName() << endl;
+            m_wizard.CountLoses();
         }
     }
 }
