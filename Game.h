@@ -8,11 +8,11 @@ using namespace std;
 
 //constants
 const string FILE_NAME = "proj2.txt"; //File name
-static const int limitOfRarity1 = 72;
-static const int limitOfRarity2 = 84;
-static const int limitOfRarity3 = 14;
-static const int limitOfRarity4 = 20;
-static const int limitOfRarity5 = 7;
+const int limitOfRarity1 = 71;
+const int limitOfRarity2 = 83;
+const int limitOfRarity3 = 13;
+const int limitOfRarity4 = 19;
+const int limitOfRarity5 = 6;
 
 class Game {
 public:
@@ -58,6 +58,8 @@ public:
     void AttackFoundable();
 
     void SelectFoundableToAttack(int chosenRarity);
+
+    void ShowWinRate();
 
 private:
     Wizard m_wizard; //Wizard for game (player)

@@ -59,8 +59,8 @@ public:
 private:
     string m_name; //Name of the Foundable
     string m_type; //Type of the Foundable
-    int m_rarity{}; //Rarity of the Foundable (1-5)
-    int m_toughness{}; //Toughness of the Foundable
+    int m_rarity; //Rarity of the Foundable (1-5)
+    int m_toughness; //Toughness of the Foundable
 };
 
 #endif // Header Guard

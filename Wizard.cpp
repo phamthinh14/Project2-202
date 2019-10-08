@@ -9,16 +9,26 @@
 const string fullRarityTypeWarning = "You have found all Foundables at that level of rarity!";
 
 Wizard::Wizard() {
-    SetToughness((rand() % MIN_START_TOUGH) + MIN_START_TOUGH);
-    SetLevel(1);
-    SetWin(0);
-    SetLose(0);
+//    SetToughness((rand() % MIN_START_TOUGH) + MIN_START_TOUGH);
+//    SetLevel(1);
+//    SetWin(0);
+//    SetLose(0);
+    m_toughness = (rand() % MIN_START_TOUGH) + MIN_START_TOUGH;
+    m_level = 1;
+    m_wins = 0;
+    m_losses = 0;
 }
 
 Wizard::Wizard(string name) {
-    SetName(name);
-    SetToughness((rand() % MIN_START_TOUGH) + MIN_START_TOUGH);
-    SetLevel(1);
+//    SetName(name);
+//    SetToughness((rand() % MIN_START_TOUGH) + MIN_START_TOUGH);
+//    SetLevel(1);
+    m_name = name;
+    m_toughness = (rand() % MIN_START_TOUGH) + MIN_START_TOUGH;
+    m_level = 1;
+    m_wins = 0;
+    m_losses = 0;
+
 }
 
 string Wizard::GetName() {
@@ -95,10 +105,10 @@ bool Wizard::CheckFoundable(Foundable newFoundable) {
     bool isRarityEqual = false;
     bool isToughnessEqual = false;
     for (int i = 0; i < NUM_FOUNDABLE; ++i) {
-        if (m_foundables[i].GetName().compare(newFoundable.GetName()) == 0) {
+        if (m_foundables[i].GetName() == newFoundable.GetName()) {
             isNameEqual = true;
         }
-        if (m_foundables[i].GetType().compare(newFoundable.GetType()) == 0) {
+        if (m_foundables[i].GetType() == newFoundable.GetType()) {
             isTypeEqual = true;
         }
         if (m_foundables[i].GetRarity() == newFoundable.GetRarity()) {
@@ -130,12 +140,13 @@ bool Wizard::AttackFoundable(Foundable enemy) {
 }
 
 void Wizard::PrintMyFoundables() {
+    int number = 1;
     if (GetWins() == 0) {
         cout << "You have not defeated any foundables yet.";
     }
     if (GetWins() != 0) {
         for (int i = 0; i < GetWins(); ++i) {
-            cout << m_foundables[i].GetName() << " " << m_foundables[i].GetType() <<
+            cout << i + number << "/ " << m_foundables[i].GetName() << " " << m_foundables[i].GetType() <<
                  " Rarity: " << m_foundables[i].GetRarity() << " Toughness: " << m_foundables[i].GetToughness()
                  << endl;
         }
@@ -145,63 +156,3 @@ void Wizard::PrintMyFoundables() {
 void Wizard::IncreaseLevel() {
     m_level++;
 }
-
-//    bool isFoundableAcquired;
-//    switch (newFoundable.GetRarity()) {
-//        case 1:
-//            if (acquiredRarity1 < limitOfRarity1) {
-//                InsertFoundable(newFoundable);
-//                acquiredRarity1++;
-//                isFoundableAcquired = true;
-//            }
-//            if (acquiredRarity1 == limitOfRarity1) {
-//                cout << fullRarityTypeWarning << endl;
-//                isFoundableAcquired = false;
-//            }
-//            break;
-//        case 2:
-//            if (acquiredRarity2 < limitOfRarity2) {
-//                InsertFoundable(newFoundable);
-//                acquiredRarity2++;
-//                isFoundableAcquired = true;
-//            }
-//            if (acquiredRarity2 == limitOfRarity2) {
-//                cout << fullRarityTypeWarning << endl;
-//                isFoundableAcquired = false;
-//            }
-//            break;
-//        case 3:
-//            if (acquiredRarity3 < limitOfRarity3) {
-//                InsertFoundable(newFoundable);
-//                acquiredRarity3++;
-//                isFoundableAcquired = true;
-//            }
-//            if (acquiredRarity3 == limitOfRarity3) {
-//                cout << fullRarityTypeWarning << endl;
-//                isFoundableAcquired = false;
-//            }
-//            break;
-//        case 4:
-//            if (acquiredRarity4 < limitOfRarity4) {
-//                InsertFoundable(newFoundable);
-//                acquiredRarity4++;
-//                isFoundableAcquired = true;
-//            }
-//            if (acquiredRarity4 == limitOfRarity4) {
-//                cout << fullRarityTypeWarning << endl;
-//                isFoundableAcquired = false;
-//            }
-//            break;
-//        case 5:
-//            if (acquiredRarity5 < limitOfRarity5) {
-//                InsertFoundable(newFoundable);
-//                acquiredRarity5++;
-//                isFoundableAcquired = true;
-//            }
-//            if (acquiredRarity5 == limitOfRarity5) {
-//                cout << fullRarityTypeWarning << endl;
-//                isFoundableAcquired = false;
-//            }
-//    }
-//    return isFoundableAcquired;
-

@@ -97,7 +97,6 @@ private:
     // Preconditions: None
     // Postconditions: Updates m_level by one
     void IncreaseLevel();
-
     string m_name; //Wizard name
     int m_toughness; //Wizard toughness
     int m_level; //Wizard level

@@ -12,10 +12,14 @@ Foundable::Foundable() {
 }
 
 Foundable::Foundable(string name, string type, int rarity, int toughness) {
-    SetName(name);
-    SetType(type);
-    SetRarity(rarity);
-    SetToughness(toughness);
+//    SetName(name);
+//    SetType(type);
+//    SetRarity(rarity);
+//    SetToughness(toughness);
+    m_name = name;
+    m_type = type;
+    m_rarity = rarity;
+    m_toughness = toughness;
 }
 
 string Foundable::GetName() {
